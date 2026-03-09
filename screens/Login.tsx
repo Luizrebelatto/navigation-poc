@@ -11,12 +11,22 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export default function Login() {
   const { signIn } = useAuth();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        placeholderTextColor="#999"
+        autoCapitalize="words"
+        value={name}
+        onChangeText={setName}
+      />
 
       <TextInput
         style={styles.input}
@@ -37,7 +47,7 @@ export default function Login() {
         onChangeText={setPassword}
       />
 
-      <Pressable style={styles.button} onPress={() => signIn(email, password)}>
+      <Pressable style={styles.button} onPress={() => signIn(name, email, password)}>
         <Text style={styles.buttonText}>Entrar</Text>
       </Pressable>
     </View>
