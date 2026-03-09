@@ -1,5 +1,10 @@
-import Navigation from '@/navigation';
+import { AuthProvider } from "@/contexts/AuthContext";
+import Navigation from "@/navigation";
 
 export default function App() {
-  return <Navigation />;
+  return (
+    <AuthProvider>
+      <Navigation />
+    </AuthProvider>
+  );
 }

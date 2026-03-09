@@ -12,10 +12,12 @@ import "react-native-reanimated";
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAuth } from "@/contexts/AuthContext";
 
 import ExploreScreen from "@/screens/ExploreScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import ModalScreen from "@/screens/ModalScreen";
+import AuthRoutes from "@/navigation/auth";
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -31,8 +33,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
 
 function TabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -66,24 +66,31 @@ function TabNavigator() {
   );
 }
 
+function AppRoutes() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Tabs"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Modal"
+        component={ModalScreen}
+        options={{ presentation: "modal", title: "Modal" }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function Navigation() {
   const colorScheme = useColorScheme();
+  const { signed } = useAuth();
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Tabs"
-            component={TabNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Modal"
-            component={ModalScreen}
-            options={{ presentation: "modal", title: "Modal" }}
-          />
-        </Stack.Navigator>
+        {signed ? <AppRoutes /> : <AuthRoutes />}
         <StatusBar style="auto" />
       </NavigationContainer>
     </ThemeProvider>
