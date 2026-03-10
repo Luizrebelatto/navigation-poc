@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -47,7 +41,10 @@ export default function Login() {
         onChangeText={setPassword}
       />
 
-      <Pressable style={styles.button} onPress={() => signIn(name, email, password)}>
+      <Pressable
+        style={styles.button}
+        onPress={() => signIn(name, email, password)}
+      >
         <Text style={styles.buttonText}>Entrar</Text>
       </Pressable>
     </View>
