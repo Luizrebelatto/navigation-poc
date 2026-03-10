@@ -16,12 +16,10 @@ import { useAuth } from "@/contexts/AuthContext";
 
 import ExploreScreen from "@/screens/ExploreScreen";
 import HomeScreen from "@/screens/HomeScreen";
-import ModalScreen from "@/screens/ModalScreen";
 import AuthRoutes from "@/navigation/auth";
 
 export type RootStackParamList = {
   Tabs: undefined;
-  Modal: undefined;
 };
 
 export type TabParamList = {
@@ -73,11 +71,6 @@ function AppRoutes() {
         name="Tabs"
         component={TabNavigator}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Modal"
-        component={ModalScreen}
-        options={{ presentation: "modal", title: "Modal" }}
       />
     </Stack.Navigator>
   );
