@@ -24,7 +24,7 @@ export type RootStackParamList = {
 
 export type TabParamList = {
   Home: undefined;
-  Explore: undefined;
+  Explore: { message: string } | undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
