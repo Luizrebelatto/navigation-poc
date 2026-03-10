@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   welcome: {
+    color: "#000",
     fontSize: 24,
     fontWeight: "700",
     marginBottom: 24,
