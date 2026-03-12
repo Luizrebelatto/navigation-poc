@@ -22,14 +22,7 @@ export default function ExploreScreen() {
         style={styles.button}
         onPress={() => navigation.setParams({ message: "Hello luiz" })}
       >
-        <ThemedText style={styles.buttonText}>Atualizar Params</ThemedText>
-      </Pressable>
-
-      <Pressable
-        style={[styles.button, styles.resetButton]}
-        onPress={() => navigation.setParams({ message: "Hello" })}
-      >
-        <ThemedText style={styles.buttonText}>Resetar Params</ThemedText>
+        <ThemedText style={styles.buttonText}>Click</ThemedText>
       </Pressable>
     </View>
   );
