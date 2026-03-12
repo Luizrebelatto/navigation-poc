@@ -5,9 +5,17 @@ import {
   NavigationContainer,
   RouteProp,
   ThemeProvider,
+  useNavigation,
 } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+  DrawerContentComponentProps,
+} from "@react-navigation/drawer";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
@@ -77,6 +85,22 @@ function TabNavigator() {
   );
 }
 
+function CustomDrawerContent(props: DrawerContentComponentProps) {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItem
+        label="Voltar"
+        onPress={() => navigation.goBack()}
+        labelStyle={{ color: "#48494B" }}
+      />
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
+
 function DrawerNavigator({
   route,
 }: {
@@ -86,6 +110,7 @@ function DrawerNavigator({
 
   return (
     <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         drawerActiveTintColor: "#48494B",
         drawerInactiveTintColor: "#D3D3D3",
