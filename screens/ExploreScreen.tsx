@@ -25,7 +25,7 @@ export default function ExploreScreen() {
 
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate("Detail", { message: "Hello luiz" })}
+        onPress={() => navigation.navigate("Drawer", { message: "Hello luiz" })}
       >
         <ThemedText style={styles.buttonText}>Go to stack</ThemedText>
       </Pressable>

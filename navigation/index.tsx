@@ -3,9 +3,11 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
+  RouteProp,
   ThemeProvider,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
@@ -15,13 +17,21 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useAuth } from "@/contexts/AuthContext";
 
 import DetailScreen from "@/screens/DetailScreen";
+import ProfileScreen from "@/screens/ProfileScreen";
+import SettingsScreen from "@/screens/SettingsScreen";
 import ExploreScreen from "@/screens/ExploreScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import AuthRoutes from "@/navigation/auth";
 
 export type RootStackParamList = {
   Tabs: undefined;
+  Drawer: { message: string } | undefined;
+};
+
+export type DrawerParamList = {
   Detail: { message: string } | undefined;
+  Profile: undefined;
+  Settings: undefined;
 };
 
 export type TabParamList = {
@@ -31,6 +41,7 @@ export type TabParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
+const Drawer = createDrawerNavigator<DrawerParamList>();
 
 function TabNavigator() {
   return (
@@ -66,6 +77,40 @@ function TabNavigator() {
   );
 }
 
+function DrawerNavigator({
+  route,
+}: {
+  route: RouteProp<RootStackParamList, "Drawer">;
+}) {
+  const params = route.params;
+
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        drawerActiveTintColor: "#48494B",
+        drawerInactiveTintColor: "#D3D3D3",
+      }}
+    >
+      <Drawer.Screen
+        name="Detail"
+        component={DetailScreen}
+        initialParams={params}
+        options={{ title: "Detail" }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ title: "Profile" }}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: "Settings" }}
+      />
+    </Drawer.Navigator>
+  );
+}
+
 function AppRoutes() {
   return (
     <Stack.Navigator>
@@ -75,9 +120,9 @@ function AppRoutes() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Detail"
-        component={DetailScreen}
-        options={{ title: "Detail" }}
+        name="Drawer"
+        component={DrawerNavigator}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

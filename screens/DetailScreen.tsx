@@ -1,11 +1,10 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
-import { RootStackParamList } from "@/navigation";
+import { DrawerParamList } from "@/navigation";
 
-type DetailRouteProp = RouteProp<RootStackParamList, "Detail">;
+type DetailRouteProp = RouteProp<DrawerParamList, "Detail">;
 
 export default function DetailScreen() {
   const route = useRoute<DetailRouteProp>();
