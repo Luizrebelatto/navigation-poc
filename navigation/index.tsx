@@ -14,12 +14,14 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useAuth } from "@/contexts/AuthContext";
 
+import DetailScreen from "@/screens/DetailScreen";
 import ExploreScreen from "@/screens/ExploreScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import AuthRoutes from "@/navigation/auth";
 
 export type RootStackParamList = {
   Tabs: undefined;
+  Detail: { message: string } | undefined;
 };
 
 export type TabParamList = {
@@ -71,6 +73,11 @@ function AppRoutes() {
         name="Tabs"
         component={TabNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Detail"
+        component={DetailScreen}
+        options={{ title: "Detail" }}
       />
     </Stack.Navigator>
   );

@@ -1,12 +1,17 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
-import { TabParamList } from "@/navigation";
+import { RootStackParamList, TabParamList } from "@/navigation";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { CompositeNavigationProp } from "@react-navigation/native";
 
 type ExploreRouteProp = RouteProp<TabParamList, "Explore">;
-type ExploreNavigationProp = BottomTabNavigationProp<TabParamList, "Explore">;
+type ExploreNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<TabParamList, "Explore">,
+  NativeStackNavigationProp<RootStackParamList>
+>;
 
 export default function ExploreScreen() {
   const route = useRoute<ExploreRouteProp>();
@@ -20,9 +25,9 @@ export default function ExploreScreen() {
 
       <Pressable
         style={styles.button}
-        onPress={() => navigation.setParams({ message: "Hello luiz" })}
+        onPress={() => navigation.navigate("Detail", { message: "Hello luiz" })}
       >
-        <ThemedText style={styles.buttonText}>Click</ThemedText>
+        <ThemedText style={styles.buttonText}>Go to stack</ThemedText>
       </Pressable>
     </View>
   );
